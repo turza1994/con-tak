@@ -1,29 +1,16 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { db } from "./config/db";
+import { addContact } from "./redux/contactSlice";
 
 function App() {
+  const dispatch = useDispatch();
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [number, setNumber] = useState("")
-  console.log(name, email, number);
 
   const handleSubmit = async ()=>{
-    try {
-
-      // Add the new friend!
-      const id = await db.contacts.add({
-        name,
-        email,
-        number
-      });
-
-      {console.log(`Friend ${name} successfully added. Got id ${id}`);}
-      setName("");
-      setEmail("");
-      setNumber("")
-    } catch (error) {
-      {console.log(`Failed to add ${name}: ${error}`);}
-    }
+    dispatch(addContact({name, email, number}))
   }
 
   return (
