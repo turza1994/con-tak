@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { db } from "./config/db";
 
 function App() {
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [number, setNumber] = useState("")
+  console.log(name, email, number);
+
+  const handleSubmit = async ()=>{
+    try {
+
+      // Add the new friend!
+      const id = await db.contacts.add({
+        name,
+        email,
+        number
+      });
+
+      {console.log(`Friend ${name} successfully added. Got id ${id}`);}
+      setName("");
+      setEmail("");
+      setNumber("")
+    } catch (error) {
+      {console.log(`Failed to add ${name}: ${error}`);}
+    }
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input type="text" name="name" onBlur={(e)=>setName(e.target.value)} />
+      <input type="text" name="email" onBlur={(e)=>setEmail(e.target.value)} />
+      <input type="number" name="number" onBlur={(e)=>setNumber(e.target.value)} />
+      <button onClick={handleSubmit}>click</button>
     </div>
   );
 }
