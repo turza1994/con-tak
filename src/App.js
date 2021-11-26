@@ -1,24 +1,29 @@
-import { useState } from "react";
+import { useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { db } from "./config/db";
-import { addContact } from "./redux/contactSlice";
+import { getContacts } from "./redux/contactSlice";
+import ContactPage from "./pages/ContactPage/ContactPage";
+import HomePage from "./pages/HomePage/HomePage";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   const dispatch = useDispatch();
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [number, setNumber] = useState("")
-
-  const handleSubmit = async ()=>{
-    dispatch(addContact({name, email, number}))
-  }
+ 
+  useEffect(()=>{
+    dispatch(getContacts())
+  }, [dispatch])
 
   return (
     <div className="App">
-      <input type="text" name="name" onBlur={(e)=>setName(e.target.value)} />
-      <input type="text" name="email" onBlur={(e)=>setEmail(e.target.value)} />
-      <input type="number" name="number" onBlur={(e)=>setNumber(e.target.value)} />
-      <button onClick={handleSubmit}>click</button>
+      <Router>
+        <Navbar />
+
+        <Routes>
+          {/* <Route exact path="/" element={ <HomePage /> } /> */}
+          <Route path="/" element={ <ContactPage /> } />
+        </Routes>
+
+      </Router>
     </div>
   );
 }
