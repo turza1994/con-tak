@@ -23,7 +23,8 @@ const addContactToDB = async (name, email, number)=>{
 }
 
 export const getContactsFromDB = async ()=>{
-    const contacts = await db.contacts.toArray()
+    let contacts = await db.contacts.toArray()
+    contacts = contacts.sort((a, b) => a.name<b.name && -1)
     return contacts;
 }
 
