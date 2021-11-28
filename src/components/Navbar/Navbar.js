@@ -16,7 +16,7 @@ const Navbar = () => {
                             <Link className="nav-link text-decoration-none text-light-blue" aria-current="page" to="/">Home</Link>
                         </li>
                         <li className="nav-item mx-2">
-                            <Link className="nav-link text-decoration-none text-light-blue" aria-current="page" to="/">Contact Lists</Link>
+                            <Link className="nav-link text-decoration-none text-light-blue" aria-current="page" to="/contact">Contact Lists</Link>
                         </li>
                     </ul>
                 </div>

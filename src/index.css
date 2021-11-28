@@ -31,3 +31,8 @@ code {
 .text-light-blue{
   color: #4ccce9;
 }
+.text-light-blue:active{
+  
+  text-decoration: none;
+  color: #4ccce9;
+}

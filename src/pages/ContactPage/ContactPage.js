@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import ContactPageHeader from '../../components/ContactPageHeader/ContactPageHeader';
 import SingleContact from '../../components/SingleContact/SingleContact';
 import '../../index.css';
 
 const ContactPage = () => {
+    const dispatch = useDispatch();
     let contacts = useSelector((state) => state.contacts.contacts)
     console.log(contacts);
     let [filteredContacts, setFilteredContacts] = useState([])
@@ -15,13 +17,13 @@ const ContactPage = () => {
 
     useEffect(()=>{
         setFilteredContacts([...contacts])
-    }, [contacts])
+    }, [contacts, dispatch])
 
     const renderContactWithNameGroup = (cv)=>{
         alphabets[cv.name[0]] = true
 
         return <div>
-                    <div className="w-100 text-center mb-1 text-black-50 text-uppercase lh-1" ><small key={`${cv.id}tu`}>{cv.name[0]}</small></div>
+                    <div className="w-100 text-center mb-1 text-black-50 text-uppercase lh-1" key={`${cv.id}tu`} ><small key={`${cv.id}sm`}>{cv.name[0]}</small></div>
                     <SingleContact key={cv.id} contactInfo={cv} />
                </div>
     }

@@ -6,19 +6,19 @@ export const getContacts = createAsyncThunk('contacts/getContacts', async () => 
     return contacts;
 });
 
-const addContactToDB = async (name, email, number)=>{
+const addContactToDB = async (firstName, lastName, email, number)=>{
     try {
         // Add the new friend!
         const id = await db.contacts.add({
-          name,
+          name: `${firstName} ${lastName}`,
           email,
           number
         });
 
-        console.log(`Friend ${name} successfully added. Got id ${id}`)
+        console.log(`Friend ${firstName} successfully added. Got id ${id}`)
 
       } catch (error) {
-        console.log(`Failed to add ${name}: ${error}`)
+        console.log(`Failed to add ${firstName}: ${error}`)
       }
 }
 
@@ -37,8 +37,8 @@ const contactSlice = createSlice({
     initialState,
     reducers: {
         addContact: (state, action)=>{
-            const {name, email, number} = action.payload
-            addContactToDB(name, email, number)
+            const {firstName, lastName, email, number} = action.payload
+            addContactToDB(firstName, lastName, email, number)
             state.contacts.push(action.payload)
         },
     },
