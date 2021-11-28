@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addContact } from '../../redux/contactSlice';
 import Modal from 'react-modal';
 
@@ -29,7 +29,6 @@ const AddContactForm = () => {
         window.location.reload(true)
     }
 
-    let subtitle;
     const [modalIsOpen, setIsOpen] = React.useState(false);
 
     function openModal() {
@@ -38,7 +37,7 @@ const AddContactForm = () => {
 
     function afterOpenModal() {
         // references are now sync'd and can be accessed.
-        // subtitle.style.color = '#f00';
+        
     }
 
     function closeModal() {

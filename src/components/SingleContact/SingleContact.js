@@ -2,7 +2,7 @@ import React from 'react';
 import '../../index.css';
 
 const SingleContact = (props) => {
-    const {name, email, number} = props.contactInfo
+    const {name, number} = props.contactInfo
 
     return (
         <div className="bg-white mb-1 p-2 d-flex align-items-center rounded-3">
