@@ -13,7 +13,6 @@ const ContactPageHeader = ({onSearchChange}) => {
             </div>
 
             <div className="buttons d-flex">
-                {/* <button className="btn btn-info btn-sm border-0 rounded-3 text-white me-2 py-1"><small>Add Contacts</small></button> */}
                 <AddContactForm />
                 <button className="btn btn-light btn-sm border-0 rounded-3 bg-grey text-black-50 fw-light lead py-1"><small>Export</small></button>
             </div>

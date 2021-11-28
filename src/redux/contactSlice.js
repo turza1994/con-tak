@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { db } from '../config/db';
+import { addContactToDB, getContactsFromDB } from '../db/db';
 
 export const getContacts = createAsyncThunk('contacts/getContacts', async () => {
     const contacts = getContactsFromDB()
@@ -12,29 +12,6 @@ export const addContact = createAsyncThunk('contacts/addContact', async (contact
     return newContact;
 });
 
-const addContactToDB = async ({firstName, lastName, email, number})=>{
-    try {
-        // Add the new friend!
-        const id = await db.contacts.add({
-          name: `${firstName} ${lastName}`,
-          email,
-          number
-        });
-
-        console.log(`Friend ${firstName} successfully added. Got id ${id}`)
-        return {id, name: `${firstName} ${lastName}`, email, number}
-
-      } catch (error) {
-        console.log(`Failed to add ${firstName}: ${error}`)
-      }
-}
-
-export const getContactsFromDB = async ()=>{
-    let contacts = await db.contacts.toArray()
-    contacts = contacts.sort((a, b) => a.name<b.name && -1)
-    return contacts;
-}
-
 const initialState = {
     contacts: [],
 };
@@ -42,14 +19,9 @@ const initialState = {
 const contactSlice = createSlice({
     name: 'contacts',
     initialState,
-    reducers: {
-        // addContact: (state, action)=>{
-        //     const {firstName, lastName, email, number} = action.payload
-        //     addContactToDB(firstName, lastName, email, number)
-        //     state.contacts.push(action.payload)
-        // },
-    },
+    reducers: {},
     extraReducers: {
+        //getting all contacts
         [getContacts.pending]: () => {
             console.log('Pending');
         },
@@ -61,6 +33,7 @@ const contactSlice = createSlice({
             console.log('Rejected!');
         },
 
+        //adding a contact
         [addContact.pending]: () => {
             console.log('Pending');
         },

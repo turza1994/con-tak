@@ -44,7 +44,7 @@ const ContactPage = () => {
 
     return (
         <div className="m-5 w-75 mx-auto rounded-3 bg-light-grey shadow pb-3" style={{borderRadius: '100px'}}>
-            <ContactPageHeader onSearchChange={onSearchChange} />
+            <ContactPageHeader key="alpha" onSearchChange={onSearchChange} />
             <div className="px-3">
                 {
                     filteredContacts.map(cv => {

@@ -10,7 +10,7 @@ const SingleContact = (props) => {
                 {name[0]}
             </label>
             <div className="d-flex flex-column justify-content-center align-items-start">
-                <label className="text-secondary lh-1">{name}</label>
+                <label className="text-secondary lh-1 text-capitalize">{name}</label>
                 <label className="text-black-50 fw-light lh-1"><small>{number}</small></label>
             </div>
         </div>

@@ -25,9 +25,12 @@ const AddContactForm = () => {
     const [number, setNumber] = useState("")
 
     const handleSubmit = async (e)=>{
-        // console.log(`${firstName} ${lastName} ${email} ${number}`);
-        dispatch(addContact({firstName, lastName, email, number}))
-        // getAddContactObject({firstName, lastName, email, number})
+        dispatch(addContact({
+            name: `${firstName} ${lastName}`.toLowerCase(),
+            email: email.toLowerCase(),
+            number: number.toLowerCase()
+        }))
+        closeModal()
     }
 
     const [modalIsOpen, setIsOpen] = React.useState(false);
