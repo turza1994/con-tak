@@ -48,7 +48,7 @@ const contactSlice = createSlice({
         },
         [getContacts.fulfilled]: (state, { payload }) => {
             console.log('Fetched Successfully!');
-            return { ...state, contacts: payload };
+            return { ...state, contacts: payload, filteredContacts: payload };
         },
         [getContacts.rejected]: () => {
             console.log('Rejected!');

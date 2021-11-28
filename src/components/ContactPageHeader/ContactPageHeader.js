@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import '../../index.css';
 
-const ContactPageHeader = () => {
+const ContactPageHeader = ({onSearchChange}) => {
+    const [searchValue, setSearchValue] = useState("")
+
     return (
-        <div className="bg-little-grey w-100 px-2 py-3 rounded-top d-flex flex-xs-column flex-sm-column flex-md-row flex-row justify-content-around align-items-center mb-1">
+        <div className="bg-little-grey w-100 px-2 py-3 rounded-top d-flex flex-xs-column flex-sm-column flex-md-row flex-row justify-content-around align-items-center mb-1" >
             <div className="input-group w-75">
-                <input type="text" className="form-control bg-light-grey border-0" placeholder="Search contacts" aria-label="Recipient's username" aria-describedby="basic-addon2" />
-                <span className="input-group-text bg-light-grey border-0" id="basic-addon2">@</span>
+                <input type="text" className="form-control bg-light-grey border-0" placeholder="Search contacts" aria-label="Recipient's username" aria-describedby="basic-addon2" onChange={onSearchChange}/>
+
+                <span className="input-group-text bg-light-grey border-0" id="basic-addon2"><i className="fas fa-search text-black-50"></i></span>
             </div>
 
             <div className="buttons d-flex">
