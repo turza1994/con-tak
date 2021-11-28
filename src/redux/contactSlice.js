@@ -6,7 +6,13 @@ export const getContacts = createAsyncThunk('contacts/getContacts', async () => 
     return contacts;
 });
 
-const addContactToDB = async (firstName, lastName, email, number)=>{
+export const addContact = createAsyncThunk('contacts/addContact', async (contactInfo) => {
+    console.log(contactInfo);
+    const newContact = addContactToDB(contactInfo)
+    return newContact;
+});
+
+const addContactToDB = async ({firstName, lastName, email, number})=>{
     try {
         // Add the new friend!
         const id = await db.contacts.add({
@@ -16,6 +22,7 @@ const addContactToDB = async (firstName, lastName, email, number)=>{
         });
 
         console.log(`Friend ${firstName} successfully added. Got id ${id}`)
+        return {id, name: `${firstName} ${lastName}`, email, number}
 
       } catch (error) {
         console.log(`Failed to add ${firstName}: ${error}`)
@@ -36,11 +43,11 @@ const contactSlice = createSlice({
     name: 'contacts',
     initialState,
     reducers: {
-        addContact: (state, action)=>{
-            const {firstName, lastName, email, number} = action.payload
-            addContactToDB(firstName, lastName, email, number)
-            state.contacts.push(action.payload)
-        },
+        // addContact: (state, action)=>{
+        //     const {firstName, lastName, email, number} = action.payload
+        //     addContactToDB(firstName, lastName, email, number)
+        //     state.contacts.push(action.payload)
+        // },
     },
     extraReducers: {
         [getContacts.pending]: () => {
@@ -48,13 +55,24 @@ const contactSlice = createSlice({
         },
         [getContacts.fulfilled]: (state, { payload }) => {
             console.log('Fetched Successfully!');
-            return { ...state, contacts: payload, filteredContacts: payload };
+            return { ...state, contacts: payload };
         },
         [getContacts.rejected]: () => {
+            console.log('Rejected!');
+        },
+
+        [addContact.pending]: () => {
+            console.log('Pending');
+        },
+        [addContact.fulfilled]: (state, { payload }) => {
+            console.log('Fetched Successfully!');
+            state.contacts.push(payload)
+            state.contacts.sort((a, b) => a.name<b.name && -1)
+        },
+        [addContact.rejected]: () => {
             console.log('Rejected!');
         },
     }
 });
 
-export const { addContact } = contactSlice.actions;
 export default contactSlice.reducer;

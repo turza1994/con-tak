@@ -24,9 +24,10 @@ const AddContactForm = () => {
     const [email, setEmail] = useState("")
     const [number, setNumber] = useState("")
 
-    const handleSubmit = async ()=>{
+    const handleSubmit = async (e)=>{
+        // console.log(`${firstName} ${lastName} ${email} ${number}`);
         dispatch(addContact({firstName, lastName, email, number}))
-        window.location.reload(true)
+        // getAddContactObject({firstName, lastName, email, number})
     }
 
     const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -59,7 +60,6 @@ const AddContactForm = () => {
                 <i className="fas fa-times text-black-50 ms-auto fs-3" onClick={closeModal}></i>
             </div>
             <p className="text-center text-secondary">Contact Info</p>
-            <form className="px-5">
                 <div className="mb-3 row">
                     <label htmlFor="staticFirstName" className="col-sm-2 col-form-label">Name:</label>
                     <div className="col-sm-10">
@@ -92,7 +92,6 @@ const AddContactForm = () => {
                 <div className="w-100 d-flex justify-content-end">
                     <button className="btn btn-info btn-sm border-0 rounded-3 text-white me-2 py-1" onClick={handleSubmit}><small>Save Contact</small></button>
                 </div>
-            </form>
           </Modal>
         </div>
       );

@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import ContactPageHeader from '../../components/ContactPageHeader/ContactPageHeader';
 import SingleContact from '../../components/SingleContact/SingleContact';
 import '../../index.css';
 
 const ContactPage = () => {
-    const dispatch = useDispatch();
-    let contacts = useSelector((state) => state.contacts.contacts)
+    const contacts = useSelector((state) => state.contacts.contacts)
     console.log(contacts);
-    let [filteredContacts, setFilteredContacts] = useState([])
+
+    const [filteredContacts, setFilteredContacts] = useState([...contacts])
     console.log(filteredContacts);
 
-    const alphabets={}
+    let alphabets={}
     console.log(alphabets);
 
     useEffect(()=>{
         setFilteredContacts([...contacts])
-    }, [contacts, dispatch])
+    }, [contacts])
 
     const renderContactWithNameGroup = (cv)=>{
         alphabets[cv.name[0]] = true
