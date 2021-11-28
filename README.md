@@ -19,8 +19,9 @@ Using this app one can create contacts with name, email, phone number. Then inpu
 
 ## Features:
 
-=> Users can add contact
-=> Users can search specific contact
+=> Users can add contact \
+=> Users can search specific contact \
+=> Users can download a pdf of contacts
 
 
 ## Technologies:
