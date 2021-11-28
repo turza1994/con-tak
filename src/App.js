@@ -18,8 +18,8 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route exact path="/" element={ <HomePage /> } />
-          <Route path="/contact" element={ <ContactPage /> } />
+          <Route exact path="/" element={ <ContactPage /> } />
+          <Route path="/home" element={ <HomePage /> } />
         </Routes>
       </Router>
     </div>

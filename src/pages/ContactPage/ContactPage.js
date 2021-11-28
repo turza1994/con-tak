@@ -2,17 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ContactPageHeader from '../../components/ContactPageHeader/ContactPageHeader';
 import SingleContact from '../../components/SingleContact/SingleContact';
+import { Scrollbars } from 'react-custom-scrollbars';
 import '../../index.css';
 
 const ContactPage = () => {
     const contacts = useSelector((state) => state.contacts.contacts)
-    console.log(contacts);
-
     const [filteredContacts, setFilteredContacts] = useState([...contacts])
-    console.log(filteredContacts);
-
     let alphabets={}
-    console.log(alphabets);
 
     useEffect(()=>{
         setFilteredContacts([...contacts])
@@ -22,13 +18,13 @@ const ContactPage = () => {
         alphabets[cv.name[0]] = true
 
         return <div>
-                    <div className="w-100 text-center mb-1 text-black-50 text-uppercase lh-1" key={`${cv.id}tu`} ><small key={`${cv.id}sm`}>{cv.name[0]}</small></div>
-                    <SingleContact key={cv.id} contactInfo={cv} />
+                    <div className="w-100 text-center mb-1 text-black-50 text-uppercase lh-1"><small>{cv.name[0]}</small></div>
+                    <SingleContact key={`${cv.id}ng`} contactInfo={cv} />
                </div>
     }
 
     const renderSingleContact = (cv)=>{
-        return <SingleContact key={cv.id} contactInfo={cv} />
+        return <SingleContact key={`${cv.id}si`} contactInfo={cv} />
     }
 
     const onSearchChange = (e)=>{
@@ -44,17 +40,20 @@ const ContactPage = () => {
 
     return (
         <div className="m-5 w-75 mx-auto rounded-3 bg-light-grey shadow pb-3" style={{borderRadius: '100px'}}>
-            <ContactPageHeader key="alpha" onSearchChange={onSearchChange} />
-            <div className="px-3">
-                {
-                    filteredContacts.map(cv => {
-                        return !alphabets[cv.name[0]] ? 
-                        renderContactWithNameGroup(cv) 
-                        : 
-                        renderSingleContact(cv)
-                    })
-                }
-            </div>
+            <ContactPageHeader onSearchChange={onSearchChange} />
+            
+            <Scrollbars style={{ width: '100%', height: '100vh' }}>
+                <div className="px-3">
+                    {
+                        filteredContacts.map(cv => {
+                            return !alphabets[cv.name[0]] ? 
+                            renderContactWithNameGroup(cv) 
+                            : 
+                            renderSingleContact(cv)
+                        })
+                    }
+                </div>
+            </Scrollbars>
         </div>
     );
 };
